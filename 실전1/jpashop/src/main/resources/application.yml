@@ -16,6 +16,6 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug #logger로 확인: hibernate가 생성하는 모든 sql문이 debug로 확인가능
-    org.hibernate.type: trace #쿼리 파라미터 로그 남기기
+    org.hibernate.orm.jdbc.bind: trace #스프링부트 3.x, 쿼리 파라미터 로그 남기기
 
 

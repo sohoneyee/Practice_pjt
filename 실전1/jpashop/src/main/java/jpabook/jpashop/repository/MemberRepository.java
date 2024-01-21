@@ -1,7 +1,6 @@
 package jpabook.jpashop.repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jpabook.jpashop.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -12,8 +11,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberRepository {
 
-//    @PersistenceContext // 스프링+어노테이션을 통해 엔티티 매니저 주입받음. spring data jpa의 지원으로 @Autowired로 바꾸기 가능
-//    => 얘 역시 @RequiredArgsConstructor로 바꿀 수 있음 => 필드에 final 추가 필수
+//    @PersistenceContext // 스프링+이 어노테이션을 통해 엔티티 매니저를 주입받음. spring data jpa의 지원으로 @Autowired로 바꾸기 가능
+//    => 그런데 얘 역시 @RequiredArgsConstructor로 바꿀 수 있음 => 필드에 final 추가 필수
     private final EntityManager em;
 
     // 영속성 컨텍스트에 멤버 엔티티를 넣음 -> 트랜잭션이 커밋되는 시점에 DB에 반영됨
@@ -34,7 +33,7 @@ public class MemberRepository {
 
     // 파라미터 바인딩해서 특정 이름의 회원만 찾는 메소드
     public List<Member> findByName(String name) {
-        return em.createQuery("select m from Member m where m.name=name", Member.class)
+        return em.createQuery("select m from Member m where m.name=:name", Member.class)
                 .setParameter("name", name)
                 .getResultList();
     }

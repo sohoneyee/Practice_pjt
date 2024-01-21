@@ -18,7 +18,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository; // final로 가는 것을 추천함
 
-//    @Autowired // 생성자가 하나만 있다면 알아서 자동injection을 해줌
+//    @Autowired // 생성자가 하나만 있다면 알아서 자동 injection을 해줌
 //    public MemberService(MemberRepository memberRepository) {
 //        this.memberRepository = memberRepository;
 //    }
@@ -45,6 +45,12 @@ public class MemberService {
     // 회원 한 명 조회
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
     }
 }
 
